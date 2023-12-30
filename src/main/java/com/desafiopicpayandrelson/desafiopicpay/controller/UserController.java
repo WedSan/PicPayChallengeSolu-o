@@ -4,6 +4,7 @@ import com.desafiopicpayandrelson.desafiopicpay.dto.UserDto;
 import com.desafiopicpayandrelson.desafiopicpay.model.User.UserEntity;
 import com.desafiopicpayandrelson.desafiopicpay.service.UserService;
 import com.desafiopicpayandrelson.desafiopicpay.service.UserValidationService;
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,8 +28,10 @@ public class UserController {
         this.userValidation = userValidation;
     }
 
+
     @PostMapping("register")
-    public ResponseEntity<UserEntity> register(@RequestBody @Valid UserDto userDto){
+    @Transactional
+    public ResponseEntity<UserEntity> register(@RequestBody @Valid UserDto userDto) {
         this.userValidation.validate(userDto);
         UserEntity userEntity = this.userService.create(userDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(this.userService.save(userEntity));
