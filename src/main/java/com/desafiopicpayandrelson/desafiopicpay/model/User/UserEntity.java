@@ -27,7 +27,8 @@ public class UserEntity {
 
     private BigDecimal balance;
 
-    public UserEntity(){}
+    public UserEntity() {
+    }
 
     public UserEntity(Long id, String name, String document, String email, String password, AccountType accountType, BigDecimal balance) {
         this.id = id;
