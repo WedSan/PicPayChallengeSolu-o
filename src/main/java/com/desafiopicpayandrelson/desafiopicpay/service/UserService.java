@@ -7,5 +7,7 @@ public interface UserService {
 
     UserEntity create(UserDto userDto);
 
+    UserEntity findUser(Long id);
+
     UserEntity save(UserEntity userEntity);
 }
