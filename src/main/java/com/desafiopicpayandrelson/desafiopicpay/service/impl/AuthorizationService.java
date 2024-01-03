@@ -19,8 +19,8 @@ public class AuthorizationService {
     }
 
     /*
-     * This method SIMULATES an authorization from an external service, as requested in the challenge
-     */
+    * This method SIMULATES an authorization from an external service, as requested in the challenge
+    */
     public void authorizeTransaction(UserEntity receiver, UserEntity sender, BigDecimal amount){
         String json = requestAuthorization();
         var authorizationResponse = extractAuthorizationResponse(json);
