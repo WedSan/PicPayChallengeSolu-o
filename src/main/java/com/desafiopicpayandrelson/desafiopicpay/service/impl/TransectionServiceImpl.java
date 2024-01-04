@@ -25,15 +25,17 @@ public class TransectionServiceImpl implements TransactionService {
 
     private final AuthorizationService authorizationService;
 
+    private final NotificationService notificationService;
+
 
 
     @Autowired
-    public TransectionServiceImpl(TransactionRepository transactionRepository, UserService userService, List<TransactionValidator> transactionValidators, AuthorizationService authorizationService) {
+    public TransectionServiceImpl(TransactionRepository transactionRepository, UserService userService, List<TransactionValidator> transactionValidators, AuthorizationService authorizationService, NotificationService notificationService) {
         this.transactionRepository = transactionRepository;
         this.userService = userService;
         this.transactionValidators = transactionValidators;
         this.authorizationService = authorizationService;
-
+        this.notificationService = notificationService;
     }
 
     @Override
@@ -49,7 +51,8 @@ public class TransectionServiceImpl implements TransactionService {
         Transaction transaction = new Transaction(receiver, sender, transactionValue);
         transferBalance(sender, receiver, transactionValue);
 
-
+        notificationService.sendNotification(sender.getEmail(), "Transaction completed successfully");
+        notificationService.sendNotification(receiver.getEmail(), "Transaction completed successfully");
 
         return this.transactionRepository.save(transaction);
     }
