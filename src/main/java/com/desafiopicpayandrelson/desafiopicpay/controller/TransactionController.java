@@ -1,6 +1,7 @@
 package com.desafiopicpayandrelson.desafiopicpay.controller;
 
 import com.desafiopicpayandrelson.desafiopicpay.dto.TransactionDto;
+import com.desafiopicpayandrelson.desafiopicpay.dto.TransactionResponseDto;
 import com.desafiopicpayandrelson.desafiopicpay.model.Transaction;
 import com.desafiopicpayandrelson.desafiopicpay.service.TransactionService;
 import jakarta.validation.Valid;
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("api/transaction")
 public class TransactionController {
 
-    private TransactionService transactionService;
+    private final TransactionService transactionService;
 
     public TransactionController(TransactionService transactionService) {
         this.transactionService = transactionService;
@@ -24,7 +25,8 @@ public class TransactionController {
     @PostMapping("send")
     public ResponseEntity transferFunds(@RequestBody @Valid TransactionDto transactionDto){
         Transaction transaction = this.transactionService.createTransaction(transactionDto);
-        return ResponseEntity.status(HttpStatus.CREATED).body(transaction);
+        TransactionResponseDto transactionResponse = new TransactionResponseDto(transaction);
+        return ResponseEntity.status(HttpStatus.CREATED).body(transactionResponse);
     }
 
 }
