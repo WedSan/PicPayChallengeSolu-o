@@ -15,7 +15,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @Service
-public class TransectionServiceImpl implements TransactionService {
+public class TransactionServiceImpl implements TransactionService{
 
     private final TransactionRepository transactionRepository;
 
@@ -28,9 +28,8 @@ public class TransectionServiceImpl implements TransactionService {
     private final NotificationService notificationService;
 
 
-
     @Autowired
-    public TransectionServiceImpl(TransactionRepository transactionRepository, UserService userService, List<TransactionValidator> transactionValidators, AuthorizationService authorizationService, NotificationService notificationService) {
+    public TransactionServiceImpl(TransactionRepository transactionRepository, UserService userService, List<TransactionValidator> transactionValidators, AuthorizationService authorizationService, NotificationService notificationService) {
         this.transactionRepository = transactionRepository;
         this.userService = userService;
         this.transactionValidators = transactionValidators;
