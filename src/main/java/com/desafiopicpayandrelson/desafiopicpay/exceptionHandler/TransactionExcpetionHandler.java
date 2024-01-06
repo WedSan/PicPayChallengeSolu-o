@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class TransactionExcpetionHandler {
 
     @ExceptionHandler(InsufficientFundsException.class)
-    public ResponseEntity InsufficientFundsException(TransactionNotAuthorizedException ex){
+    public ResponseEntity InsufficientFundsException(InsufficientFundsException ex){
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
     }
 
