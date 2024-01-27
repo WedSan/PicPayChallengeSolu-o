@@ -1,0 +1,26 @@
+version: "3"
+
+services:
+  database:
+    image: postgres:16.1
+    environment:
+      POSTGRES_USER: spring_user
+      POSTGRES_PASSWORD: spring_application
+      POSTGRES_DB: some_database
+    networks:
+      - "spring_network"
+    ports:
+      - "5432:5432"
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - database
+    networks:
+      - "spring_network"
+    ports:
+      - "8080:8080"
+networks:
+  spring_network:
+    driver: bridge
